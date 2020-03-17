@@ -1,0 +1,19 @@
+title: ErrorInfo
+type: object
+description: HTTPステータスコードと、システム内で利用するエラーコードを別に保持する。messageにはエラーの概要を記載し、detailInfoには詳細情報を記載する。
+properties:
+  status:
+    type: string
+  message:
+    type: string
+  code:
+    type: string
+  detailInfo:
+    type: string
+example:
+  status: '401'
+  message: 'Authentication information is missing or invalid'
+  code: '4001'
+  detailInfo: 'Reference URL https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401'
+x-tags:
+  - Response

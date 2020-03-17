@@ -1,0 +1,13 @@
+title: SuccessInfo
+type: object
+x-tags:
+  - Response
+properties:
+  status:
+    type: string
+  message:
+    type: string
+example:
+  status: '201'
+  message: 'Register company is successful.'
+description: HTTPステータスコードと正常に処理が行われた旨のメッセージを保持する。主にGET以外のリクエストの正常応答として返す。
