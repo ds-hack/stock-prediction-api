@@ -1,2 +1,5 @@
+# openapi auto generated code
+gen/
+
 # gabbage
 .DS_Store

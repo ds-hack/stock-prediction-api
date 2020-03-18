@@ -40,7 +40,8 @@ paths:
         - basicAuth: []
     post:
       summary: PostCompanies
-      tags: []
+      tags:
+        - Company
       responses:
         '201':
           description: Created
@@ -70,7 +71,8 @@ paths:
           explode: false
     delete:
       summary: DeleteCompanies
-      tags: []
+      tags:
+        - Company
       responses:
         '200':
           description: OK
