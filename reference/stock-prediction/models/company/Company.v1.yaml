@@ -1,0 +1,34 @@
+title: Company
+type: object
+x-tags:
+  - Company
+description: 企業名・銘柄コード・設立日などの会社の基本情報を保持する。
+properties:
+  companyId:
+    type: string
+    minLength: 4
+    maxLength: 4
+    description: システム内で設定する企業毎に一意となるコード
+  companyName:
+    type: string
+    description: 企業名
+  stockCode:
+    type: string
+    description: 銘柄コード
+  countryCode:
+    type: string
+    description: 国コード
+  listedMarket:
+    type: string
+    description: 上場市場
+  foundationDate:
+    type: string
+    description: 設立日(月)
+    format: date
+    pattern: "20\\d{2}-[01]\\d-[0-3]\\d"
+  longitude:
+    type: number
+    description: 本社所在地経度
+  latitude:
+    type: number
+    description: 本社所在地緯度

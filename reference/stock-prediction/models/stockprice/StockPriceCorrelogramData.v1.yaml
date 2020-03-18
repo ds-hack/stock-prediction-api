@@ -1,0 +1,18 @@
+title: StockPriceCorrelogramData
+type: object
+x-tags:
+  - StockPrice
+description: 株価時系列データのコレログラム描画用データ本体。
+properties:
+  lag:
+    type: integer
+    description: ラグ(何時点前との相関かを表す)
+  corr:
+    type: number
+    description: 自己相関係数または偏自己相関係数
+  conf0025:
+    type: number
+    description: '95%信頼区間の下側2.5%点'
+  conf0975:
+    type: number
+    description: '95%信頼区間の上側2.5%点'

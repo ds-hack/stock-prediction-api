@@ -1,0 +1,32 @@
+title: StockPriceCorrelogram
+type: object
+x-tags:
+  - StockPrice
+description: 企業ID・企業名・銘柄コードと共に、コレログラム描画用データを保持する。
+properties:
+  timestamp:
+    type: string
+    description: クライアントへレスポンスを送信する日時
+    format: date-time
+    pattern: "20\\d{2}-[01]\\d-[0-3]\\d [0-2]\\d:[0-5]\\d:[0-5]\\d"
+  companyId:
+    type: string
+    description: システム内で設定する企業毎に一意となるコード
+    minLength: 4
+    maxLength: 4
+  companyName:
+    type: string
+    description: 企業名
+  stockCode:
+    type: string
+    description: 銘柄コード
+  acf:
+    type: array
+    description: 自己相関コレログラム描画用のデータ
+    items:
+      $ref: ./StockPriceCorrelogramData.v1.yaml
+  pacf:
+    type: array
+    description: 偏自己相関コレログラム描画用のデータ
+    items:
+      $ref: ./StockPriceCorrelogramData.v1.yaml

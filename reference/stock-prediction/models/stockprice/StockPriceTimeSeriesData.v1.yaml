@@ -1,0 +1,14 @@
+title: StockPriceTimeSeriesData
+type: object
+x-tags:
+  - StockPrice
+description: 株価の時系列データ本体。クエリパラメータによって日付の間隔や始値・終値等の種別が決定する。
+properties:
+  date:
+    type: string
+    description: 日付
+    pattern: "20\\d{2}-[01]\\d-[0-3]\\d"
+  value:
+    type: number
+    minimum: 0
+    description: 株価

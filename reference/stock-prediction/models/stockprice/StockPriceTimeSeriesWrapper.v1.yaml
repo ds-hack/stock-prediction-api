@@ -1,0 +1,16 @@
+title: StockPriceTimeSeriesWrapper
+type: object
+x-tags:
+  - StockPrice
+description: ユーザーが、株価モニタリング・予測対象として登録している企業の株価の時系列データ
+properties:
+  timestamp:
+    type: string
+    description: クライアントへレスポンスを送信する日時
+    format: date-time
+    pattern: "20\\d{2}-[01]\\d-[0-3]\\d [0-2]\\d:[0-5]\\d:[0-5]\\d"
+  stockPrices:
+    type: array
+    description: 企業ID・企業名・銘柄コードと共に株価の時系列データを保持するクラスの配列
+    items:
+      $ref: ./StockPriceTimeSeries.v1.yaml

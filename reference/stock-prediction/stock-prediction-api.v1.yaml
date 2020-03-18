@@ -27,8 +27,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                $ref: ./models/company/CompanyWrapper.v1.yaml
         '401':
           description: Unauthorized
           content:
@@ -108,6 +107,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/company/CompanyWrapper.v1.yaml
       operationId: searchCompanies
       description: 株価のモニタリング・予測対象として登録可能な企業を検索条件により絞り込み取得します。
       parameters:
@@ -131,6 +134,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/stockprice/StockPriceTimeSeriesWrapper.v1.yaml
       operationId: getStockPricesTimeSeries
       description: ユーザーが、株価モニタリング・予測対象として登録している企業の株価の時系列データを取得します。クエリパラメータにて、詳細な取得条件を絞ることが出来ます。
       security:
@@ -151,11 +158,13 @@ paths:
           description: 予測期間を表示する場合はtrue、表示しない場合はfalseを指定
         - schema:
             type: string
+            pattern: "20\\d{2}-[01]\\d-[0-3]\\d"
           in: query
           name: startDate
           description: 株価データ取得の開始日
         - schema:
             type: string
+            pattern: "20\\d{2}-[01]\\d-[0-3]\\d"
           in: query
           name: endDate
           description: 株価データ取得の終了日。予測期間は含まない。
@@ -166,6 +175,101 @@ paths:
           in: query
           name: period
           description: 時系列データの取得周期を日数で指定する
+        - schema:
+            type: boolean
+            default: 'false'
+          in: query
+          name: log
+          description: 対数系列を取得する場合はtrue、しない場合はfalse
+        - schema:
+            type: integer
+            default: 0
+            maximum: 0
+          in: query
+          name: diffCount
+          description: 差分系列を取得する際の、何時点前との差分を取るかの階数を指定する。1時点の日数はperiodで指定した日数であり、必ずしも1日とは限らない。
+        - schema:
+            type: string
+            default: open
+            enum:
+              - open
+              - high
+              - low
+              - close
+              - volume
+          in: query
+          name: priceType
+          description: 'open,high,low,close,volumeの中から取得する株価の種別を選択する。'
+  /stockprices/timeseries/correlogram:
+    get:
+      summary: GetStockPricesCorrelogram
+      tags:
+        - StockPrice
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/stockprice/StockPriceCorrelogram.v1.yaml
+      operationId: getStockPricesCorrelogram
+      description: クエリパラメータで指定した企業の株価の時系列データについて、コレログラム描画用の自己相関・偏自己相関を取得します。
+      security:
+        - basicAuth: []
+      parameters:
+        - schema:
+            type: string
+            maxLength: 4
+            minLength: 4
+          in: query
+          name: companyId
+          description: ユーザーが、株価モニタリング・予測対象として登録している企業ID。複数存在する場合はカンマで区切る。
+          required: true
+        - schema:
+            type: integer
+            minimum: 1
+            default: 30
+          in: query
+          name: lags
+          description: 何時点前までの自己相関を調べるかを指定する。
+    parameters: []
+  /stockprices/timeseries/candlestick:
+    get:
+      summary: GetStockPricesCandleStick
+      tags:
+        - StockPrice
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/stockprice/StockPriceCandleStick.v1.yaml
+      operationId: getStockPricesCandleStick
+      security:
+        - basicAuth: []
+      description: クエリパラメータで指定した企業の株価の時系列データを、ローソク足チャート描画用のフォーマットで取得します。
+      parameters:
+        - schema:
+            type: string
+            maxLength: 4
+            minLength: 4
+          in: query
+          name: companyId
+          description: ユーザーが、株価モニタリング・予測対象として登録している企業ID。複数存在する場合はカンマで区切る。
+          required: true
+        - schema:
+            type: string
+            pattern: "20\\d{2}-[01]\\d-[0-3]\\d"
+          in: query
+          name: startDate
+          description: 株価データ取得の開始日
+        - schema:
+            type: string
+            pattern: "20\\d{2}-[01]\\d-[0-3]\\d"
+          in: query
+          name: endDate
+          description: 株価データ取得の終了日
 tags:
   - name: Company
     description: 株価モニタリング・予測対象の企業に関連するAPI

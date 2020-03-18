@@ -1,0 +1,26 @@
+title: StockPriceCandleStickData
+type: object
+x-tags:
+  - StockPrice
+description: ローソク足チャート描画用の株価の時系列データ本体。
+properties:
+  date:
+    type: string
+    description: 日付
+    pattern: "20\\d{2}-[01]\\d-[0-3]\\d"
+  open:
+    type: number
+    minimum: 0
+    description: 株価(始値)
+  high:
+    type: number
+    minimum: 0
+    description: 株価(高値)
+  low:
+    type: number
+    minimum: 0
+    description: 株価(安値)
+  close:
+    type: number
+    minimum: 0
+    description: 株価(終値)

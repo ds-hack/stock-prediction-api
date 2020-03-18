@@ -1,0 +1,22 @@
+title: StockPriceTimeSeries
+type: object
+x-tags:
+  - StockPrice
+description: 企業ID・企業名・銘柄コードと共に株価の時系列データを保持する。
+properties:
+  companyId:
+    type: string
+    description: システム内で設定する企業毎に一意となるコード
+    minLength: 4
+    maxLength: 4
+  companyName:
+    type: string
+    description: 企業名
+  stockCode:
+    type: string
+    description: 銘柄コード
+  data:
+    type: array
+    description: 株価の時系列データ本体。クエリパラメータによって日付の間隔や始値・終値等の種別が決定する。
+    items:
+      $ref: ./StockPriceTimeSeriesData.v1.yaml
