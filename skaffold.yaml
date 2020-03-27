@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2alpha4
+kind: Config
+metadata:
+  name: stock-prediction-api
+build:
+  artifacts:
+  - image: dshacks/dshack-api-app-development
+    context: .
+deploy:
+  kubectl:
+    manifests:
+    - ./kubernetes/development/secret.yaml
+    - ./kubernetes/development/api-deployment.yaml
