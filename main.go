@@ -7,7 +7,7 @@ import (
 	// "github.com/swaggo/gin-swagger"
 
 	// "./docs"
-	"./routers"
+	"github.com/ds-hack/stock-prediction-api/routers"
 )
 
 func main() {
