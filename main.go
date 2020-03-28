@@ -4,9 +4,14 @@ import (
 	// "log"
 	// "github.com/gin-gonic/gin"
 
+	"github.com/ds-hack/stock-prediction-api/database"
 	_ "github.com/ds-hack/stock-prediction-api/docs"
 	"github.com/ds-hack/stock-prediction-api/routers"
 )
+
+func init() {
+	database.Setup()
+}
 
 // @title Stock Prediction API
 // @version 1.0
@@ -19,7 +24,7 @@ import (
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host localhost:8080
+// @host 34.84.101.196:30080
 // @BasePath /api/v1
 // @query.collection.format multi
 func main() {

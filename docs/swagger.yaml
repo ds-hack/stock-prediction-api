@@ -1,5 +1,53 @@
 basePath: /api/v1
-host: localhost:8080
+definitions:
+  models.Company:
+    properties:
+      companyId:
+        description: システム内で設定する企業毎に一意となるコード
+        type: string
+      companyName:
+        description: 企業名
+        type: string
+      countryCode:
+        description: 国コード
+        type: string
+      foundationDate:
+        description: 設立日(月)
+        type: string
+      latitude:
+        description: 本社所在地緯度
+        type: number
+      listedMarket:
+        description: 上場市場
+        type: string
+      longitude:
+        description: 本社所在地経度
+        type: number
+      stockCode:
+        description: 銘柄コード
+        type: string
+    type: object
+  models.CompanyWrapper:
+    properties:
+      companies:
+        description: 企業名・銘柄コード・設立日などの会社の基本情報を保持するクラスの配列
+        items:
+          $ref: '#/definitions/models.Company'
+        type: array
+      timestamp:
+        description: クライアントへレスポンスを送信する日時
+        type: string
+    type: object
+  models.HTTPError:
+    properties:
+      message:
+        description: エラーに対する付加的な情報
+        type: string
+      status:
+        description: HTTP Status Code
+        type: integer
+    type: object
+host: 34.84.101.196:30080
 info:
   contact:
     email: datascientist.toolbox.com@gmail.com
@@ -11,5 +59,30 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Stock Prediction API
   version: "1.0"
-paths: {}
+paths:
+  /companies:
+    get:
+      description: Dashboardアプリに登録されている企業の基本情報を取得します。
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CompanyWrapper'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.HTTPError'
+      summary: Dashboardアプリに登録されている企業情報一覧を取得
+      tags:
+      - companies
 swagger: "2.0"
