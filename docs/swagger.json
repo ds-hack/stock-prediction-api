@@ -14,7 +14,7 @@
         },
         "version": "1.0"
     },
-    "host": "34.84.101.196:30080",
+    "host": "34.84.203.5:30080",
     "basePath": "/api/v1",
     "paths": {
         "/companies": {

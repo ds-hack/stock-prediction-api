@@ -47,7 +47,7 @@ definitions:
         description: HTTP Status Code
         type: integer
     type: object
-host: 34.84.101.196:30080
+host: 34.84.203.5:30080
 info:
   contact:
     email: datascientist.toolbox.com@gmail.com

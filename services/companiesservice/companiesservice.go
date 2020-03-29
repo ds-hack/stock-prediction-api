@@ -23,7 +23,7 @@ func GetAll() (*models.CompanyWrapper, error) {
 	}
 
 	for _, companydb := range companiesDB {
-		company := &models.Company{
+		company := models.Company{
 			CompanyID:      companydb.CompanyID,
 			CompanyName:    companydb.CompanyName,
 			StockCode:      companydb.StockCode,
@@ -33,7 +33,7 @@ func GetAll() (*models.CompanyWrapper, error) {
 			Longitude:      companydb.Longitude,
 			Latitude:       companydb.Latitude,
 		}
-		companies = append(companies, *company)
+		companies = append(companies, company)
 	}
 	companyWrapper = &models.CompanyWrapper{
 		Timestamp: time.Now(),
