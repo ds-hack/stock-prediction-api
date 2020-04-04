@@ -13,7 +13,7 @@ func GetRawPrices(stockCode, startDate, endDate string) (*models.RawStockPriceWr
 	var (
 		rawStockPriceWrapper *models.RawStockPriceWrapper
 		rawStockPrices       []models.RawStockPrice
-		companyDB            *database.Company
+		companyDB            database.Company
 		stockPricesDB        []*database.StockPrice
 		err                  error
 	)

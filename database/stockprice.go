@@ -33,7 +33,9 @@ type StockPrice struct {
 func GetStockPrices(companyID, startDate, endDate string) ([]*StockPrice, error) {
 	var stockprices []*StockPrice
 
-	err := db.Where("company_id = ? AND date BETWEEN ? AND ?", companyID, startDate, endDate).
+	err := db.Table("stockprice").
+		Where("company_id = ? AND date BETWEEN ? AND ?", companyID, startDate, endDate).
+		Order("date").
 		Find(&stockprices).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
