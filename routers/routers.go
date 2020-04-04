@@ -23,6 +23,11 @@ func InitRouter() *gin.Engine {
 		{
 			companies.GET("", c.ListCompanies)
 		}
+
+		stockprices := v1.Group("/stockprices")
+		{
+			stockprices.GET("rawdata", c.GetRawStockPrices)
+		}
 	}
 
 	return r

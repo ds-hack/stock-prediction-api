@@ -43,3 +43,14 @@ func GetCompanies() ([]*Company, error) {
 
 	return companies, nil
 }
+
+// GetCompanyByStockCode CompaniesテーブルからStockCodeをキーとして企業情報を取得する
+func GetCompanyByStockCode(stockCode string) (*Company, error) {
+	var company *Company
+	err := db.Where("stock_code = ?", stockCode).First(&company).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+
+	return company, nil
+}

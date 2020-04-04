@@ -15,8 +15,6 @@ import (
 // @Tags companies
 // @Produce  json
 // @Success 200 {object} models.CompanyWrapper
-// @Failure 400 {object} models.HTTPError
-// @Failure 404 {object} models.HTTPError
 // @Failure 500 {object} models.HTTPError
 // @Router /companies [get]
 func (c *Controller) ListCompanies(ctx *gin.Context) {
