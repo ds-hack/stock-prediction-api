@@ -22,6 +22,7 @@ func InitRouter() *gin.Engine {
 		companies := v1.Group("/companies")
 		{
 			companies.GET("", c.ListCompanies)
+			companies.GET("/:stockCode", c.GetCompany)
 		}
 
 		stockprices := v1.Group("/stockprices")

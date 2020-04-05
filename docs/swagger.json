@@ -50,7 +50,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "companies"
+                    "stockprices"
                 ],
                 "summary": "株価の生データを取得",
                 "parameters": [

@@ -42,3 +42,31 @@ func GetAll() (*models.CompanyWrapper, error) {
 
 	return companyWrapper, nil
 }
+
+// GetCompanyByStockCode CompaniesテーブルからStockCodeをキーとして企業情報を取得する
+func GetCompanyByStockCode(stockCode string) (*models.CompanyDetail, error) {
+	var (
+		companyDetail *models.CompanyDetail
+		companyDB     database.Company
+	)
+
+	companyDB, err := database.GetCompanyByStockCode(stockCode)
+	if err != nil {
+		log.Printf("database fetch err: %v", err)
+		return nil, err
+	}
+
+	companyDetail = &models.CompanyDetail{
+		Timestamp:      time.Now(),
+		CompanyID:      companyDB.CompanyID,
+		CompanyName:    companyDB.CompanyName,
+		StockCode:      companyDB.StockCode,
+		CountryCode:    companyDB.CountryCode,
+		ListedMarket:   companyDB.ListedMarket,
+		FoundationDate: companyDB.FoundationDate,
+		Longitude:      companyDB.Longitude,
+		Latitude:       companyDB.Latitude,
+	}
+
+	return companyDetail, nil
+}

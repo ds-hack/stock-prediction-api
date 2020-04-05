@@ -154,5 +154,5 @@ paths:
             $ref: '#/definitions/models.HTTPError'
       summary: 株価の生データを取得
       tags:
-      - companies
+      - stockprices
 swagger: "2.0"

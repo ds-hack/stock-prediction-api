@@ -14,7 +14,7 @@ import (
 // GetRawStockPrices godoc
 // @Summary 株価の生データを取得
 // @Description 指定の企業について、株価の生データ(open/high/low/close/volume)を取得する
-// @Tags companies
+// @Tags stockprices
 // @Produce  json
 // @Param stockCode path string true "銘柄コード" minlength(4) maxlength(16)
 // @Param startDate query string false "株価データ取得の開始日 YYYY-MM-DDの形式で指定"
