@@ -28,6 +28,7 @@ func (c *Controller) ListCompanies(ctx *gin.Context) {
 				Status:  http.StatusInternalServerError,
 				Message: "企業情報一覧の取得時にサーバーでエラーが発生しました。",
 			})
+		return
 	}
 
 	ctx.JSON(http.StatusOK, companyWrapper)
@@ -53,6 +54,7 @@ func (c *Controller) GetCompany(ctx *gin.Context) {
 				Status:  http.StatusBadRequest,
 				Message: "パラメータが正しく指定されていません。",
 			})
+		return
 	}
 
 	companyWrapper, err := companiesservice.GetCompanyByStockCode(stockCode)
@@ -62,6 +64,7 @@ func (c *Controller) GetCompany(ctx *gin.Context) {
 				Status:  http.StatusInternalServerError,
 				Message: "企業情報の取得時にサーバーでエラーが発生しました。",
 			})
+		return
 	}
 
 	ctx.JSON(http.StatusOK, companyWrapper)

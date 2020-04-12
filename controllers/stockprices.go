@@ -37,6 +37,7 @@ func (c *Controller) GetRawStockPrices(ctx *gin.Context) {
 				Status:  http.StatusBadRequest,
 				Message: "パラメータが正しく指定されていません。",
 			})
+		return
 	}
 
 	rawStockPriceWrapper, err := stockpricesservice.GetRawPrices(
@@ -48,6 +49,7 @@ func (c *Controller) GetRawStockPrices(ctx *gin.Context) {
 				Status:  http.StatusInternalServerError,
 				Message: "株価生データの取得時にサーバーでエラーが発生しました。",
 			})
+		return
 	}
 	ctx.JSON(http.StatusOK, rawStockPriceWrapper)
 }
@@ -79,6 +81,7 @@ func (c *Controller) GetStockPricesMA(ctx *gin.Context) {
 				Status:  http.StatusBadRequest,
 				Message: "パラメータが正しく指定されていません。",
 			})
+		return
 	}
 
 	// 全てのMATypeが有効であること ^(sma|ema|wma)(5|25|75)$
@@ -90,6 +93,7 @@ func (c *Controller) GetStockPricesMA(ctx *gin.Context) {
 					Status:  http.StatusBadRequest,
 					Message: "パラメータが正しく指定されていません。",
 				})
+			return
 		}
 	}
 
@@ -102,6 +106,7 @@ func (c *Controller) GetStockPricesMA(ctx *gin.Context) {
 				Status:  http.StatusInternalServerError,
 				Message: "移動平均株価データの取得時にサーバーでエラーが発生しました。",
 			})
+		return
 	}
 	ctx.JSON(http.StatusOK, stockPriceMAWrapper)
 }
