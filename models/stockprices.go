@@ -71,8 +71,8 @@ type StockPriceMA struct {
 	Date string `json:"date,omitempty"`
 
 	// 移動平均の計算方法 (計算方法と期間のセット)
-	MAType string `json:"ma_type,omitempty"`
+	MAType string `json:"maType,omitempty"`
 
 	// 移動平均株価
-	MAValue float32 `json:"ma_value,omitempty"`
+	MAValue float32 `json:"maValue,omitempty"`
 }

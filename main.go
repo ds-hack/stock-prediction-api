@@ -23,7 +23,7 @@ func init() {
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host localhost:30080
+// @host 34.84.203.5:30080
 // @BasePath /api/v1
 // @query.collection.format multi
 func main() {
