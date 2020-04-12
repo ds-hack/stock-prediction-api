@@ -19,19 +19,98 @@
     "paths": {
         "/companies": {
             "get": {
-                "description": "Dashboardアプリに登録されている企業の基本情報を取得します。",
+                "description": "銘柄コードで指定した特定の企業についての詳細情報を取得する",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "companies"
                 ],
-                "summary": "Dashboardアプリに登録されている企業情報一覧を取得",
+                "summary": "銘柄コードで指定した特定の企業情報を取得",
+                "parameters": [
+                    {
+                        "maxLength": 16,
+                        "minLength": 4,
+                        "type": "string",
+                        "description": "銘柄コード",
+                        "name": "stockCode",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/models.CompanyWrapper"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/stockprices/ma/{stockCode}": {
+            "get": {
+                "description": "指定の企業について、指定の計算方法による移動平均株価を取得する",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stockprices"
+                ],
+                "summary": "移動平均株価データを取得",
+                "parameters": [
+                    {
+                        "maxLength": 16,
+                        "minLength": 4,
+                        "type": "string",
+                        "description": "銘柄コード",
+                        "name": "stockCode",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "移動平均の計算方法 + 計算日数のセットをカンマ区切りで指定 ex) sma5,ema25",
+                        "name": "maTypes",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "株価データ取得の開始日 YYYY-MM-DDの形式で指定",
+                        "name": "startDate",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "株価データ取得の終了日 YYYY-MM-DDの形式で指定",
+                        "name": "endDate",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.RawStockPriceWrapper"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.HTTPError"
                         }
                     },
                     "500": {
